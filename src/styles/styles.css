@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.entering-to {
+  @apply transform opacity-100 scale-100 pointer-events-auto !important;
+}

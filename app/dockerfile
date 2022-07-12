@@ -1,0 +1,16 @@
+FROM php:8.1.1-apache
+
+WORKDIR /var/www/html
+
+RUN apt-get update \
+    && apt-get install -y libonig-dev libzip-dev unzip\
+    && docker-php-ext-install pdo_mysql mysqli mbstring zip bcmath
+
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+RUN apt-get install -y nodejs
+RUN apt-get install -y build-essential
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+COPY ./php.ini /usr/local/etc/php/php.ini
